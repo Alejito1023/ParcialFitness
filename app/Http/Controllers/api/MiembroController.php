@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Miembro;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
 class MiembroController extends Controller
 {
@@ -28,18 +27,7 @@ class MiembroController extends Controller
     public function store(Request $request)
     {
 
-        $validate = Validator::make($request->all(),[
-            'miembro_nom' => ['required', 'max:30', 'unique'],
-            'suscripcion_id' => ['required', 'numeric', 'min:1'],
-
-        ]);
-
-        if($validate->fails()){
-            return response()->json([
-                'msg' => 'Se produjo un error en la validacion de la informacion',
-                'statusCode' =>400
-            ]);
-        }
+        
         $miembro = new Miembro();
 
         $miembro->miembro_nom = $request->name;
@@ -60,10 +48,7 @@ class MiembroController extends Controller
      */
     public function show(string $id)
     {
-        $miembro =Miembro::find($id);
-        if(is_null($miembro)){
-            return abort(404);
-        }
+        
         $miembro = Miembro::find($id);
         $suscripciones = DB::table('suscripciones')
         ->orderBy('tipo_suscripcion')
