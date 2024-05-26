@@ -49,7 +49,7 @@ class ClaseController extends Controller
     public function show(string $id)
     {
         //
-        $miembro = Clase::find($id);
+        $clase = Clase::find($id);
         $entrenadores = DB::table('entrenadores')
         ->orderBy('entrenador_nom')
         ->get();
@@ -69,13 +69,9 @@ class ClaseController extends Controller
         $clase->clase_descp = $request->clase_descp;
         $clase->hora_inicio = $request->hora_inicio;
         $clase->duracion = $request->duracion;
-        $clase->entrenador_id = $request->entrenador_id;
+        $clase->entrenador_id = $request->code;
         $clase->capacidad = $request->capacidad;
-
-        $clases = DB::table('clases')
-        ->join('suscripciones', 'clases.entrenador_id', "=", 'entrenadores.entrenador_id')
-        ->select('clases.*', 'entrenadores.entrenador_nom')
-        ->get();
+        $clase->save();
 
         return json_encode(['clase' =>$clase]);
     }

@@ -46,14 +46,14 @@ class ClaseController extends Controller
         $clase->clase_descp = $request->clase_descp;
         $clase->hora_inicio = $request->hora_inicio;
         $clase->duracion = $request->duracion;
-        $clase->entrenador_id = $request->entrenador_id;
+        $clase->entrenador_id = $request->code;
         $clase->capacidad = $request->capacidad;
         
         $miembros = DB::table('clases')
         ->join('entrenadores', 'clases.entrenador_id', '=', 'entrenadores.entrenador_id')
         ->select('clases.*', 'entrenadores.tipo_suscripcion')
         ->get();
-        return view('clase.index', ['clases' =>$clase]);
+        return view('clase.index', ['clases' =>$miembros]);
     }
 
     /**
@@ -90,7 +90,7 @@ class ClaseController extends Controller
         $clase->clase_descp = $request->clase_descp;
         $clase->hora_inicio = $request->hora_inicio;
         $clase->duracion = $request->duracion;
-        $clase->entrenador_id = $request->entrenador_id;
+        $clase->entrenador_id = $request->code;
         $clase->capacidad = $request->capacidad;
 
         $clases = DB::table('clases')
@@ -112,7 +112,7 @@ class ClaseController extends Controller
         $clase->delete();
 
         $clases = DB::table('clases')
-        ->join('entrenadores', 'clases.suscripcion_id', "=", 'entrenadores.entrenador_id')
+        ->join('entrenadores', 'clases.entrenador_id', "=", 'entrenadores.entrenador_id')
         ->select('clases.*', 'entrenadores.entrenador_nom')
         ->get();
 
