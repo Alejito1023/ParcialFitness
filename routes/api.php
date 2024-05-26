@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\MiembroController;
+use App\Http\Controllers\api\EquipoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,3 +14,9 @@ Route::post('/miembros',[MiembroController::class, 'store'])->name('miembros.sto
 Route::delete('/miembros/{miembro}',[MiembroController::class, 'destroy'])->name('miembros.destroy');
 Route::put('/miembros/{miembro}',[MiembroController::class, 'update'])->name('miembros.update');
 Route::get('/miembros/{miembro}',[MiembroController::class, 'show'])->name('miembros.show');
+
+Route::get('/equipos', [EquipoController::class, 'index'])->name('equipos');
+Route::post('/equipos', [EquipoController::class, 'store'])->name('equipos.store');
+Route::get('/equipos/{equipo}', [EquipoController::class, 'show'])->name('equipos.show');
+Route::put('/equipos/{equipo}', [EquipoController::class, 'update'])->name('equipos.update');
+Route::delete('/equipos/{equipo}', [EquipoController::class, 'destroy'])->name('equipos.destroy');
