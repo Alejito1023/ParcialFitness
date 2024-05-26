@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MiembroController;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\EntrenadorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,3 +22,10 @@ Route::post('/equipos', [EquipoController::class, 'store'])->name('equipos.store
 Route::get('/equipos/{equipo}/edit', [EquipoController::class, 'edit'])->name('equipos.edit');
 Route::put('/equipos/{equipo}', [EquipoController::class, 'update'])->name('equipos.update');
 Route::delete('/equipos/{equipo}', [EquipoController::class, 'destroy'])->name('equipos.destroy');
+
+Route::get('/entrenadores', [EntrenadorController::class, 'index'])->name('entrenadores.index');
+Route::get('/entrenadores/create', [EntrenadorController::class, 'create'])->name('entrenadores.create');
+Route::post('/entrenadores', [EntrenadorController::class, 'store'])->name('entrenadores.store');
+Route::get('/entrenadores/{entrenador}/edit', [EntrenadorController::class, 'edit'])->name('entrenadores.edit');
+Route::put('/entrenadores/{entrenador}', [EntrenadorController::class, 'update'])->name('entrenadores.update');
+Route::delete('/entrenadores/{entrenador}', [EntrenadorController::class, 'destroy'])->name('entrenadores.destroy');
